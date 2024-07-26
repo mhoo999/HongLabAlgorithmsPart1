@@ -7,8 +7,64 @@ using namespace std;
 string Add(string str1, string str2)
 {
 	// TODO:
+	string newStr1 = str1;
+	string newStr2 = str2;
+	string result;
+	int additiveMaximum = str1.size() >= str2.size() ? str1.size() : str2.size();
 
-	return string("0");
+	for (int i = 0; i < additiveMaximum - str1.size(); ++i)
+	{
+		newStr1 = "0" + newStr1;
+	}
+
+	for (int i = 0; i < additiveMaximum - str2.size(); ++i)
+	{
+		newStr2 = "0" + newStr2;
+	}
+
+	for (int i = 0; i < additiveMaximum; ++i)
+	{
+		result += "0";
+	}
+
+	bool addNum = false;
+
+	for (int i = additiveMaximum - 1; i >= 0; i--)
+	{
+		int x = (newStr1[i] - '0') + (newStr2[i] - '0');
+
+		if (addNum)
+		{
+			x += 1;
+			addNum = false;
+		}
+
+		if (x < 10)
+		{
+			result[i] = x + '0';
+		}
+		else
+		{
+			result[i] = (x - 10) + '0';
+			addNum = true;
+		}
+
+		cout << newStr1[i] << " " << newStr2[i] << " ";
+
+		for (int j = 0; j < result.size(); ++j)
+		{
+			cout << result[j];
+		}
+
+		cout << endl;
+	}
+
+	if (addNum)
+	{
+		result = "1" + result;
+	}
+
+	return result;
 }
 
 int main()
